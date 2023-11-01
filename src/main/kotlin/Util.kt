@@ -18,8 +18,10 @@ fun createCrossroad(): List<Road> {
  */
 fun printRoads() {
     roads.forEach {
-        println("$it arrivalTimer ${it.arrivalTimer} carsWaiting ${it.carsWaiting}")
+        println("$it arrivalTimer ${it.arrivalTimer} carsWaiting ${it.carsWaiting} " +
+                "NS_lights: ${lights.isNorthLightGreen} WE_lights: ${!lights.isNorthLightGreen}")
     }
+    println("---")
 }
 
 
@@ -29,7 +31,6 @@ fun printRoads() {
  * A helper function for debugging.
  */
 fun printEventQueue() {
-    eventQueue.forEach {
-        println("$it timer ${it.timeToExecution} NS_lights: ${lights.isNorthLightGreen} WE_lights: ${!lights.isNorthLightGreen}")
-    }
+    eventQueue.forEach { println(it) }
+    println("---")
 }

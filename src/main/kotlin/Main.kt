@@ -19,7 +19,7 @@ fun runLoop() {
         it.update()
     }
 
-    // decrements queue timers, handle due events
+    // decrement queue timers, handle due events
     eventQueue.forEach {
         it.timeToExecution -= 1
         if (it.timeToExecution == 0) {
@@ -31,7 +31,7 @@ fun runLoop() {
     eventQueue.removeAll { it.timeToExecution == 0 }
     eventQueue.addAll(newEvents)
     eventQueue.sortBy { it.timeToExecution }
-    newEvents.clear()
 
+    newEvents.clear()
     Thread.sleep(1000)
 }

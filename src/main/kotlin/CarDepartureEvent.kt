@@ -15,4 +15,9 @@ class CarDepartureEvent(
 
         println("a car departed from $direction")
     }
+
+
+    override fun toString(): String {
+        return "CarDepartureEvent(direction=$direction, timer=$timeToExecution)"
+    }
 }

@@ -42,4 +42,9 @@ class LightSwitchEvent(
             println("scheduled $eventsToSchedule car(s) from ${it.direction}")
         }
     }
+
+
+    override fun toString(): String {
+        return "LightSwitchEvent(timer=$timeToExecution)"
+    }
 }

@@ -49,4 +49,9 @@ class CarArrivalEvent(
 
             return if (carDepartureEvents.isEmpty()) 0 else carDepartureEvents.last().timeToExecution
     }
+
+
+    override fun toString(): String {
+        return "CarArrivalEvent(direction=$direction, timer=$timeToExecution)"
+    }
 }
