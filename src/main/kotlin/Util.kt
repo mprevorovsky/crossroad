@@ -11,16 +11,25 @@ fun createCrossroad(): List<Road> {
 }
 
 
+/**
+ *  Prints the current state of the crossroad.
+ *
+ *  A helper function for debugging.
+ */
 fun printRoads() {
     roads.forEach {
-        println("$it arrivalTimer ${it.arrivalTimer} carsWaiting ${it.carsWaiting} isNS ${it.isNorthSouth}")
+        println("$it arrivalTimer ${it.arrivalTimer} carsWaiting ${it.carsWaiting}")
     }
 }
 
 
+/**
+ * Prints the current state of the event queue.
+ *
+ * A helper function for debugging.
+ */
 fun printEventQueue() {
     eventQueue.forEach {
-        println("$it timer ${it.timeToExecution} NS lights on: ${lights.isNorthLightGreen}")
+        println("$it timer ${it.timeToExecution} NS_lights: ${lights.isNorthLightGreen} WE_lights: ${!lights.isNorthLightGreen}")
     }
-
 }

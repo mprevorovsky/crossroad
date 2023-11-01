@@ -1,9 +1,8 @@
 val lights = Lights()
 val roads = createCrossroad()
-val eventQueue = mutableListOf<Event>(
-    LightSwitchEvent(1),
-)
+val eventQueue = mutableListOf<Event>(LightSwitchEvent(timeToExecution = 1))
 val newEvents = mutableListOf<Event>()
+
 
 fun main() {
     while (true) runLoop()
@@ -11,14 +10,14 @@ fun main() {
 
 
 fun runLoop() {
+    println()
+    printRoads()
+    printEventQueue()
+
     // update timers, schedule car arrival events
     roads.forEach {
         it.update()
     }
-
-    println()
-    printRoads()
-    printEventQueue()
 
     // decrements queue timers, handle due events
     eventQueue.forEach {

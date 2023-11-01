@@ -7,6 +7,7 @@ data class Road(
     var arrivalTimer: Int = arrivalInterval
     var carsWaiting: Int = 0
 
+
     fun update() {
         arrivalTimer -= 1
         if (arrivalTimer == 0) {

@@ -1,8 +1,23 @@
-class LightSwitchEvent(override var timeToExecution: Int) : Event {
+/**
+ * Scheduled switching of the traffic lights.
+ *
+ * The event generates
+ * - generates a future LightSwitchEvent with inverse regulatory effect
+ * - terminates the current cycle by switching the traffic lights
+ * - schedules waiting cars (if there are any) for departure in the freshly started cycle;
+ * -- this is limited to roads with green traffic light signal
+ * -- the number of scheduled cars is limited by cycle duration.
+ */
+class LightSwitchEvent(
+    override var timeToExecution: Int
+) : Event {
+
     override fun performEventActions() {
         newEvents.add(LightSwitchEvent(getCycleDuration()))
         lights.switch()
         scheduleCarDepartureEvents()
+
+        println("scheduled light cycle switch")
     }
 
 
@@ -17,14 +32,14 @@ class LightSwitchEvent(override var timeToExecution: Int) : Event {
         val greenInterval = if (lights.isNorthLightGreen) northSouthGreenDuration else westEastGreenDuration
 
         activeRoads.forEach {
-            val eventToSchedule = minOf(greenInterval / it.arrivalInterval, it.carsWaiting)
+            val eventsToSchedule = minOf(greenInterval / carDepartureDuration, it.carsWaiting)
 
-            if (eventToSchedule == 0) return@forEach
-            for (i in 1..eventToSchedule) {
+            if (eventsToSchedule == 0) return@forEach
+            for (i in 1..eventsToSchedule) {
                 newEvents.add(CarDepartureEvent(direction = it.direction, timeToExecution = 1 + (i - 1) * carDepartureDuration))
             }
 
-            //println("scheduled $eventToSchedule car(s) from ${it.direction}")
+            println("scheduled $eventsToSchedule car(s) from ${it.direction}")
         }
     }
 }
