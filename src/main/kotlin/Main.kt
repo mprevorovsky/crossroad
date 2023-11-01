@@ -11,16 +11,16 @@ fun main() {
 
 
 fun runLoop() {
-    println()
-    //printLights()
-    //printRoads()
-    printEventQueue()
-
+    // update timers, schedule car arrival events
     roads.forEach {
-        it.value.update()
+        it.update()
     }
 
-    // decrements timers, handle current events
+    println()
+    printRoads()
+    printEventQueue()
+
+    // decrements queue timers, handle due events
     eventQueue.forEach {
         it.timeToExecution -= 1
         if (it.timeToExecution == 0) {
@@ -28,7 +28,7 @@ fun runLoop() {
         }
     }
 
-    // remove handled events, add newly created events
+    // remove handled events, add any newly created events
     eventQueue.removeAll { it.timeToExecution == 0 }
     eventQueue.addAll(newEvents)
     eventQueue.sortBy { it.timeToExecution }

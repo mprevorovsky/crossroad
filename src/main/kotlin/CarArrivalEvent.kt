@@ -11,9 +11,10 @@ class CarArrivalEvent(
 ) : Event {
 
     override fun performEventActions() {
+        //println("a car arrived from $direction")
+        roads.find { it.direction == direction }!!.carsWaiting += 1
         //TODO("Not yet implemented")
     // if green light is on && there is enough time before lights switch && the queue for this round is not already full
     //      then schedule a CarDepartureEvent
-    // else just increment the carsWaiting counter of the respective Road object
     }
 }

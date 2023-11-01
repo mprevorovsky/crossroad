@@ -14,13 +14,13 @@ const val westEastGreenDuration: Int = 12
 const val carDepartureDuration: Int = 2
 
 // A1
-const val carsArrivingPerMinuteNorth: Int = 3
+const val carsArrivingPerMinuteNorth: Int = 6
 
 // A2
-const val carsArrivingPerMinuteSouth: Int = 3
+const val carsArrivingPerMinuteSouth: Int = 7
 
 // A3
-const val carsArrivingPerMinuteWest: Int = 3
+const val carsArrivingPerMinuteWest: Int = 8
 
 // A4
-const val carsArrivingPerMinuteEast: Int = 3
+const val carsArrivingPerMinuteEast: Int = 9

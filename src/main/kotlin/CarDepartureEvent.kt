@@ -11,6 +11,7 @@ class CarDepartureEvent(
 ) : Event {
 
     override fun performEventActions() {
-        roads[direction]!!.carsWaiting -= 1
+        //println("a car departed from $direction")
+        roads.find { it.direction == direction }!!.carsWaiting -= 1
     }
 }
