@@ -1,19 +1,13 @@
 data class Road(
     val direction: String,
-    var isGreen: Boolean,
-    val greenDuration: Int,
-    var remainingGreenTime: Int = greenDuration,
     val carsArrivingPerMinute: Int,
     var timeToCarArrival: Int = 60 / carsArrivingPerMinute,
     var carsWaiting: Int = 0
 ) {
 
-    fun updateTimers() {
-        if (this.isGreen) {
-            this.remainingGreenTime -= 1
-        }
-
+    fun update() {
         if (this.timeToCarArrival == 0) {
+            this.addWaitingCar()
             this.timeToCarArrival = 60 / carsArrivingPerMinute
         }
         else {
@@ -21,9 +15,11 @@ data class Road(
         }
     }
 
-    fun updateLights() {
-        if (this.remainingGreenTime) == 0 {
-            isGreen =
-        }
+    fun addWaitingCar() {
+        this.carsWaiting += 1
+    }
+
+    fun removeWaitingCar() {
+        this.carsWaiting -= 1
     }
 }
