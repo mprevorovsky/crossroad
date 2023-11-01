@@ -1,11 +1,13 @@
 interface Event {
+    var timeToExecution: Int
+
     fun decrementTimeToExecution()
 
     fun performActions()
 }
 
 
-class LightsSwitch(var timeToExecution: Int) : Event {
+class LightsSwitch(override var timeToExecution: Int) : Event {
     override fun decrementTimeToExecution() {
         timeToExecution -= 1
     }

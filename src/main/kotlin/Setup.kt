@@ -22,34 +22,38 @@ const val carsArrivingPerMinuteWest: Int = 12
 const val carsArrivingPerMinuteEast: Int = 12
 
 
-/* A utility function to create and initialize the crossroad
+var isNorthLightGreen = true
+var timeToLightSwitch = northSouthGreenDuration
+
+
+/* A function used to create and initialize the crossroad
  */
 fun createCrossroad() : List<Road> {
     return listOf(
         Road(
             direction = "North",
-            isGreen = true,
+            isGreen = isNorthLightGreen,
             carsArrivingPerMinute = carsArrivingPerMinuteNorth,
             greenDuration = northSouthGreenDuration
         ),
 
         Road(
             direction = "South",
-            isGreen = true,
+            isGreen = isNorthLightGreen,
             carsArrivingPerMinute = carsArrivingPerMinuteSouth,
             greenDuration = northSouthGreenDuration
         ),
 
         Road(
             direction = "West",
-            isGreen = false,
+            isGreen = !isNorthLightGreen,
             carsArrivingPerMinute = carsArrivingPerMinuteWest,
             greenDuration = westEastGreenDuration
         ),
 
         Road(
             direction = "East",
-            isGreen = false,
+            isGreen = !isNorthLightGreen,
             carsArrivingPerMinute = carsArrivingPerMinuteEast,
             greenDuration = westEastGreenDuration
         )
