@@ -3,7 +3,10 @@
 fun main() {
     var eventQueue = Queue()
 
-    val roads = createRoads()
+    val p = mutableListOf<Event>()
+    p.removeFirst()
+
+    val roads = createCrossroad()
 
         runLoop(roads, eventQueue)
 }

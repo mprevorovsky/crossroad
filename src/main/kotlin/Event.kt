@@ -11,6 +11,6 @@ class LightsSwitch(var timeToExecution: Int) : Event {
     }
 
     override fun performActions() {
-
+        TODO("Not yet implemented")
     }
 }

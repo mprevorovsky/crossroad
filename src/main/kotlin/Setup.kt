@@ -22,7 +22,9 @@ const val carsArrivingPerMinuteWest: Int = 12
 const val carsArrivingPerMinuteEast: Int = 12
 
 
-fun createRoads() : List<Road> {
+/* A utility function to create and initialize the crossroad
+ */
+fun createCrossroad() : List<Road> {
     return listOf(
         Road(
             direction = "North",
