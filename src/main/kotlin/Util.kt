@@ -1,35 +1,31 @@
-/* A function used to create and initialize the crossroad
+/**
+ * Creates and initializes the crossroad as a Map of 4 Road objects (1 for each incoming direction).
  */
-fun createCrossroad(): List<Road> {
-    return listOf(
-        Road(
-            direction = "North", carsArrivingPerMinute = carsArrivingPerMinuteNorth, isNorthSouth = true
-        ),
-
-        Road(
-            direction = "South", carsArrivingPerMinute = carsArrivingPerMinuteSouth, isNorthSouth = true
-        ),
-
-        Road(
-            direction = "West", carsArrivingPerMinute = carsArrivingPerMinuteWest, isNorthSouth = false
-        ),
-
-        Road(
-            direction = "East", carsArrivingPerMinute = carsArrivingPerMinuteEast, isNorthSouth = false
-        )
+fun createCrossroad(): Map<Directions, Road> {
+    return mapOf(
+        Directions.NORTH to Road(carsArrivingPerMinute = carsArrivingPerMinuteNorth, isNorthSouth = true),
+        Directions.SOUTH to Road(carsArrivingPerMinute = carsArrivingPerMinuteSouth, isNorthSouth = true),
+        Directions.WEST to Road(carsArrivingPerMinute = carsArrivingPerMinuteWest, isNorthSouth = false),
+        Directions.EAST to Road(carsArrivingPerMinute = carsArrivingPerMinuteEast, isNorthSouth = false)
     )
 }
 
 
-
 fun printLights() {
-    println("N green ${lights.isNorthLightGreen} timer ${lights.timeToLightSwitch}")
+    println("NS green ${lights.isNorthLightGreen}")
 }
-
 
 
 fun printRoads() {
     roads.forEach {
-        println("${it.direction} dep ${it.departureTimer} arr ${it.arrivalTimer} cars ${it.carsWaiting}")
+        println("${it.key} arr ${it.value.arrivalTimer} cars ${it.value.carsWaiting}")
     }
+}
+
+
+fun printEventQueue() {
+    eventQueue.forEach {
+        println("$it timer ${it.timeToExecution}  NS lights on: ${lights.isNorthLightGreen}")
+    }
+
 }
