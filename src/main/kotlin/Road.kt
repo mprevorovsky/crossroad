@@ -1,25 +1,27 @@
 data class Road(
     val direction: String,
     val carsArrivingPerMinute: Int,
-    var timeToCarArrival: Int = 60 / carsArrivingPerMinute,
-    var carsWaiting: Int = 0
+    val departureDuration: Int = carDepartureDuration,
+    val isNorthSouth: Boolean
 ) {
+    val arrivalDuration: Int = 60 / carsArrivingPerMinute
+    var arrivalTimer: Int = arrivalDuration
+    var departureTimer: Int = departureDuration
+    var carsWaiting: Int = 0
 
     fun update() {
-        if (this.timeToCarArrival == 0) {
-            this.addWaitingCar()
-            this.timeToCarArrival = 60 / carsArrivingPerMinute
+        if (arrivalTimer == 0) {
+            carsWaiting += 1
+            arrivalTimer = arrivalDuration
         }
-        else {
-            timeToCarArrival -= 1
+        arrivalTimer -= 1
+
+        if (isNorthSouth == lights.isNorthLightGreen && carsWaiting > 0) {
+            if (departureTimer == 0) {
+                carsWaiting -= 1
+                departureTimer = departureDuration
+            }
+            departureTimer -= 1
         }
-    }
-
-    fun addWaitingCar() {
-        this.carsWaiting += 1
-    }
-
-    fun removeWaitingCar() {
-        this.carsWaiting -= 1
     }
 }

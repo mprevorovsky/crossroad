@@ -1,27 +1,20 @@
-fun main() {
-    val lights = Lights()
-    val eventQueue = mutableListOf<Event>()
-    val roads = createCrossroad()
+val lights = Lights()
+val roads = createCrossroad()
 
-    runLoop(roads, eventQueue, lights)
+fun main() {
+    while (true) runLoop()
 }
 
 
-fun runLoop(roads: Collection<Road>, eventQueue: MutableList<Event>, lights: Lights) {
+fun runLoop() {
     roads.forEach {
         it.update()
     }
-
-    updateEventQueue(eventQueue)
     lights.update()
-}
 
+    println()
+    printLights()
+    printRoads()
 
-fun updateEventQueue(eventQueue: MutableList<Event>) {
-    eventQueue.forEach { it.decrementTimeToExecution() }
-    
-    while (eventQueue.first().timeToExecution == 0) {
-        eventQueue.first().performActions()
-        eventQueue.removeFirst()
-    }
+    Thread.sleep(1000)
 }

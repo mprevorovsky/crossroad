@@ -7,7 +7,13 @@ data class Lights (
     fun update() {
         if (timeToLightSwitch == 0) {
             timeToLightSwitch = if (isNorthLightGreen) weGreenDuration else nsGreenDuration
+
+            roads.forEach {
+                if (it.isNorthSouth == isNorthLightGreen) it.departureTimer = 0
+            }
             isNorthLightGreen = !isNorthLightGreen
+
+
         }
         else timeToLightSwitch -= 1
     }
