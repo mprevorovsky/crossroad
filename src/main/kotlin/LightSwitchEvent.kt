@@ -3,25 +3,25 @@
  *
  * The event
  * - generates a future LightSwitchEvent to set green light on in the other traffic direction
- * - terminates the current cycle by switching the traffic lights
- * - schedules waiting cars (if there are any) for departure in the freshly started cycle;
+ * - terminates the current interval by switching the traffic lights
+ * - schedules waiting cars (if there are any) for departure in the freshly started lights interval;
  * -- this is limited to roads with green traffic light signal
- * -- the number of scheduled cars is limited by cycle duration.
+ * -- the number of scheduled cars is limited by lights interval duration.
  */
 class LightSwitchEvent(
     override var timeToExecution: Int
 ) : Event {
 
     override fun performEventActions() {
-        newEvents.add(LightSwitchEvent(getCycleDuration()))
+        newEvents.add(LightSwitchEvent(getIntervalDuration()))
         lights.switch()
         scheduleCarDepartureEvents()
 
-        if (VERBOSE_RUN) println("scheduled light cycle switch")
+        if (VERBOSE_RUN) println("scheduled lights switch")
     }
 
 
-    private fun getCycleDuration(): Int {
+    private fun getIntervalDuration(): Int {
         return if (lights.isNorthLightGreen) WEST_EAST_GREEN_DURATION else NORTH_SOUTH_GREEN_DURATION
     }
 

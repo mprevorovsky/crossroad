@@ -8,7 +8,7 @@ Properties of the system:
 - There is a simple red-green traffic light at each road.
 - Green interval durations are set independently for each route (pair of directions): NORTH-SOUTH (X1) and WEST-EAST (X2). Only one route is active (green) at any given time. 
 - each road has its specific rate of incoming cars per minute (A1, A2, A3, A4)
-- It takes S1 seconds for a car to drive through the crossroad (always following a straight route).
+- It takes S1 seconds for a car to drive through the crossroad (cars always follow a straight route).
 
 No other properties, behaviour or components are taken into account for simplicity.
 
@@ -44,7 +44,7 @@ A common interface for various traffic events that can be scheduled in the event
 
 The duration of the current "green" interval (i.e. the timeToExecution of the newly created LightSwitchEvent) is specific for the NORTH-SOUTH (X1) vs WEST-EAST (X2) routes.
 
-The maximum number of newly scheduled CarDepartureEvents is limited by the number of available cars waiting at each Road of the "green" route and by the duration of the "green" interval (interval duration divided by the S1 time required for one car to drive through the crossroad). 
+The maximum number of newly scheduled CarDepartureEvents is limited by the number of available cars waiting at each Road of the "green" route and by the duration of the "green" interval (interval duration divided by the S1 time a car requires to drive through the crossroad). 
 
 #### CarArrivalEvent
 
@@ -52,7 +52,7 @@ The maximum number of newly scheduled CarDepartureEvents is limited by the numbe
         fun performEventActions()
             - schedule one CarDepartureEvent or keep car waiting
 
-If traffic rules and conditions allow (the given route is "green", there is enough time left in the current lights interval taking into account cars already scheduled to depart), the arriving car is immediately scheduled for departure (a CarDepartureEvent is created).
+If traffic rules and conditions allow (the given route is "green", there is enough time left in the current lights interval - taking into account cars already scheduled to depart), the arriving car is immediately scheduled for departure (a CarDepartureEvent is created).
 
 Otherwise the car is kept waiting by incremented the carsWaiting property of the corresponding Road object.
 
@@ -66,9 +66,9 @@ The carsWaiting property of the corresponding Road object is decremented.
 
 ### Queue
 
-    class eventQueue : mutableCollectionOf<Event>
+    class eventQueue : MutableList<Event>
 
-The eventQueue component is modelled as a mutable collection of Events.
+The eventQueue component is modelled as a mutable list of Events.
 
 ### Lights
 
@@ -88,12 +88,13 @@ Lights keep the state of the traffic light system by indicating which route is c
             - when arrivalTimer runs out, reset it and schedule a new CarArrivalEvent
 
 Each Road stores information on its direction, specific rate of incoming cars, the number of cars currently waiting here, and a count-down timer towards the next arrival of a new car.
+Roads also generate new CarArrivalEvents when the respective arrivalTimers run out.
 
 #### Crossroad
 
-    class Crossroad : Collection<Road>
+    class Crossroad : List<Road>
 
-The Crossroad is modelled as a collection of 4 individual Roads.
+The Crossroad is modelled as a list of 4 individual Roads.
 
 ## Implementation notes
 

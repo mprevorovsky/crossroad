@@ -2,7 +2,7 @@
  * Event of a new car just arriving to the crossroad.
  *
  * The event is associated with a particular incoming direction of the crossroad.
- * Upon handling, the car is either scheduled for departure in the current green light cycle,
+ * Upon handling, the car is either scheduled for departure in the current green light interval,
  * or kept waiting by incrementing the carsWaiting counter of the corresponding Road object.
  */
 class CarArrivalEvent(
