@@ -15,13 +15,13 @@ No other properties, behaviour or components are taken into account for simplici
 ## Design of solution
 
 The system consists of the following objects that interact with each other and are dynamically updated as time passes:
-- Crossroad
-- Traffic Lights
+- Crossroad (with waiting cars)
+- Traffic Lights (green-red)
 - Queue of various scheduled Events (car arrival/departure, switching of lights)
 
 The whole system runs in a loop (discrete-simulation style) and is controlled by count-down timers embedded in the individual components of the system. 
 The timers are updated (decremented or reset) in each cycle of the loop.
-When a timer runs out, an action is triggered: e.g. component state is updated, scheduled event is handled and removed from the queue, new event is scheduled.
+When a timer runs out, an action is triggered: e.g. component state is updated, a scheduled event is handled and removed from the queue, a new event is scheduled.
 When an event is handled, actions specific for the given event type are performed.
 
 ### Events
@@ -101,7 +101,7 @@ The Crossroad is modelled as a list of 4 individual Roads.
 
 ## Implementation notes
 
-The main() function is located in the /src/main/kotlin/Main.kt file.
+The design of the solution has been implemented in Kotlin and the main() function is located in the /src/main/kotlin/Main.kt file.
 
 Application settings, together with all parameters specifying the dynamics of the simulated crossroad are stored as constants in the /src/main/kotlin/Configuration.kt file.
 
