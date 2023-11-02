@@ -70,6 +70,8 @@ The carsWaiting property of the corresponding Road object is decremented.
 
 The eventQueue component is modelled as a mutable list of Events.
 
+Events in the eventQueue are sorted (ascending) by their timeToExecution properties.
+
 ### Lights
 
     class Lights (isNorthLightGreen: Boolean)
