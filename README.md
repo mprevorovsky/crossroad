@@ -89,7 +89,7 @@ Lights keep the state of the traffic light system by indicating which route is c
             - decrement arrivalTimer
             - when arrivalTimer runs out, reset it and schedule a new CarArrivalEvent
 
-Each Road stores information on its direction, specific rate of incoming cars, the number of cars currently waiting here, and a count-down timer towards the next arrival of a new car.
+Each Road stores information about its direction, specific rate of incoming cars, the number of cars currently waiting here, and a count-down timer towards the next arrival of a new car.
 
 Road also generates new CarArrivalEvents when the arrivalTimer runs out.
 
