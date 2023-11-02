@@ -1,8 +1,8 @@
 /**
  * Scheduled switching of the traffic lights.
  *
- * The event generates
- * - generates a future LightSwitchEvent with inverse regulatory effect
+ * The event
+ * - generates a future LightSwitchEvent to set green light on in the other traffic direction
  * - terminates the current cycle by switching the traffic lights
  * - schedules waiting cars (if there are any) for departure in the freshly started cycle;
  * -- this is limited to roads with green traffic light signal
