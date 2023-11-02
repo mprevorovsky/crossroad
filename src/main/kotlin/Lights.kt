@@ -4,6 +4,7 @@
 data class Lights (
     var isNorthLightGreen: Boolean = true
 ) {
+
     fun switch() {
         isNorthLightGreen = !isNorthLightGreen
     }

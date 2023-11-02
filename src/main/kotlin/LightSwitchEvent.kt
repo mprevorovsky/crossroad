@@ -17,29 +17,29 @@ class LightSwitchEvent(
         lights.switch()
         scheduleCarDepartureEvents()
 
-        println("scheduled light cycle switch")
+        if (VERBOSE_RUN) println("scheduled light cycle switch")
     }
 
 
     private fun getCycleDuration(): Int {
-        return if (lights.isNorthLightGreen) westEastGreenDuration else northSouthGreenDuration
+        return if (lights.isNorthLightGreen) WEST_EAST_GREEN_DURATION else NORTH_SOUTH_GREEN_DURATION
     }
 
 
     private fun scheduleCarDepartureEvents() {
         val activeRoads = if (lights.isNorthLightGreen) roads.filter { it.isNorthSouth } else roads.filterNot { it.isNorthSouth }
 
-        val greenInterval = if (lights.isNorthLightGreen) northSouthGreenDuration else westEastGreenDuration
+        val greenInterval = if (lights.isNorthLightGreen) NORTH_SOUTH_GREEN_DURATION else WEST_EAST_GREEN_DURATION
 
         activeRoads.forEach {
-            val eventsToSchedule = minOf(greenInterval / carDepartureDuration, it.carsWaiting)
+            val eventsToSchedule = minOf(greenInterval / CAR_DEPARTURE_DURATION, it.carsWaiting)
 
             if (eventsToSchedule == 0) return@forEach
             for (i in 1..eventsToSchedule) {
-                newEvents.add(CarDepartureEvent(direction = it.direction, timeToExecution = 1 + (i - 1) * carDepartureDuration))
+                newEvents.add(CarDepartureEvent(direction = it.direction, timeToExecution = 1 + (i - 1) * CAR_DEPARTURE_DURATION))
             }
 
-            println("scheduled $eventsToSchedule car(s) from ${it.direction}")
+            if (VERBOSE_RUN) println("scheduled $eventsToSchedule car(s) from ${it.direction}")
         }
     }
 

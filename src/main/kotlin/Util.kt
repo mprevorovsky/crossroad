@@ -1,20 +1,18 @@
 /**
- * Creates and initializes the crossroad as a Map of 4 Road objects (1 for each incoming direction).
+ * Creates and initializes the crossroad.
  */
 fun createCrossroad(): List<Road> {
     return listOf(
-        Road(carsArrivingPerMinute = carsArrivingPerMinuteNorth, direction = Directions.NORTH),
-        Road(carsArrivingPerMinute = carsArrivingPerMinuteSouth, direction = Directions.SOUTH),
-        Road(carsArrivingPerMinute = carsArrivingPerMinuteWest, direction = Directions.WEST),
-        Road(carsArrivingPerMinute = carsArrivingPerMinuteEast, direction = Directions.EAST)
+        Road(carsArrivingPerMinute = CARS_ARRIVING_PER_MINUTE_NORTH, direction = Directions.NORTH),
+        Road(carsArrivingPerMinute = CARS_ARRIVING_PER_MINUTE_SOUTH, direction = Directions.SOUTH),
+        Road(carsArrivingPerMinute = CARS_ARRIVING_PER_MINUTE_WEST, direction = Directions.WEST),
+        Road(carsArrivingPerMinute = CARS_ARRIVING_PER_MINUTE_EAST, direction = Directions.EAST)
     )
 }
 
 
 /**
  *  Prints the current state of the crossroad.
- *
- *  A helper function for debugging.
  */
 fun printRoads() {
     roads.forEach {
@@ -27,8 +25,6 @@ fun printRoads() {
 
 /**
  * Prints the current state of the event queue.
- *
- * A helper function for debugging.
  */
 fun printEventQueue() {
     eventQueue.forEach { println(it) }

@@ -1,9 +1,8 @@
 /**
- * Event of a new car just coming to the crossroad.
+ * Event of a new car just arriving to the crossroad.
  *
  * The event is associated with a particular incoming direction of the crossroad.
- * Upon handling, the car is either scheduled for departure in the current lights cycle
- * (a new CarDepartureEvent is created),
+ * Upon handling, the car is either scheduled for departure in the current green light cycle,
  * or kept waiting by incrementing the carsWaiting counter of the corresponding Road object.
  */
 class CarArrivalEvent(
@@ -12,7 +11,7 @@ class CarArrivalEvent(
 ) : Event {
 
     override fun performEventActions() {
-        println("a car arrived from $direction")
+        if (VERBOSE_RUN) println("a car arrived from $direction")
 
         if (direction in listOf(Directions.NORTH, Directions.SOUTH) == lights.isNorthLightGreen)
             scheduleCarDepartureEvent()
@@ -21,20 +20,23 @@ class CarArrivalEvent(
     }
 
 
-    private fun scheduleCarDepartureEvent() {
+    private fun scheduleCarDepartureEvent(): Boolean {
         val lastScheduledDepartureTime = getLastScheduledDepartureTime()
 
-        if (getRemainingCycleDuration() - lastScheduledDepartureTime >= carDepartureDuration) {
+        if (getRemainingGreenDuration() - lastScheduledDepartureTime >= CAR_DEPARTURE_DURATION) {
             newEvents.add(CarDepartureEvent(
                 direction = direction,
-                timeToExecution = lastScheduledDepartureTime + carDepartureDuration))
+                timeToExecution = lastScheduledDepartureTime + CAR_DEPARTURE_DURATION))
 
-            println("scheduled a car from $direction")
+            if (VERBOSE_RUN) println("scheduled a car from $direction")
+            return true
         }
+
+        return false
     }
 
 
-    private fun getRemainingCycleDuration(): Int {
+    private fun getRemainingGreenDuration(): Int {
         return eventQueue
             .filterIsInstance(LightSwitchEvent::class.java)
             .first()
@@ -47,7 +49,7 @@ class CarArrivalEvent(
             .filterIsInstance(CarDepartureEvent::class.java)
             .filter { it.direction == direction }
 
-            return if (carDepartureEvents.isEmpty()) 0 else carDepartureEvents.last().timeToExecution
+        return if (carDepartureEvents.isEmpty()) 0 else carDepartureEvents.last().timeToExecution
     }
 
 
