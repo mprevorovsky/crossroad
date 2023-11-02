@@ -70,6 +70,8 @@ The carsWaiting property of the corresponding Road object is decremented.
 
 The eventQueue component is modelled as a mutable list of Events.
 
+Events in the eventQueue are sorted (ascending) by their timeToExecution properties.
+
 ### Lights
 
     class Lights (isNorthLightGreen: Boolean)
@@ -89,7 +91,7 @@ Lights keep the state of the traffic light system by indicating which route is c
 
 Each Road stores information on its direction, specific rate of incoming cars, the number of cars currently waiting here, and a count-down timer towards the next arrival of a new car.
 
-Roads also generate new CarArrivalEvents when the respective arrivalTimers run out.
+Road also generates new CarArrivalEvents when the arrivalTimer runs out.
 
 #### Crossroad
 
