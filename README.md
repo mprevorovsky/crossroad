@@ -101,7 +101,9 @@ The Crossroad is modelled as a list of 4 individual Roads.
 
 ## Implementation notes
 
-Application settings, together with all parameters specifying the dynamics of the simulated crossroad are stored as constants in the Configuration.kt file.
+The main() function is located in the /src/main/kotlin/Main.kt file.
+
+Application settings, together with all parameters specifying the dynamics of the simulated crossroad are stored as constants in the /src/main/kotlin/Configuration.kt file.
 
 The eventQueue is initialized with a single LightsSwitchEvent.
 
