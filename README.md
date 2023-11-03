@@ -24,6 +24,28 @@ The timers are updated (decremented or reset) in each cycle of the loop.
 When a timer runs out, an action is triggered: e.g. component state is updated, a scheduled event is handled and removed from the queue, a new event is scheduled.
 When an event is handled, actions specific for the given event type are performed.
 
+<hr>
+
+*NOTE ADDED EX POST*
+
+*There are (at least) two ways in which new events can be generated. They are demonstrated in the proposed solution as follows:*
+
+*1) Scheduling of traffic light intervals.*
+
+*When taken from the event queue, each handled traffic light switch event schedules the next light switch event. This way the light switch system keeps perpetuating.*
+*Also, the system needs to be initiated by providing the very first light switch event to the event queue.*
+
+*2) Scheduling of car arrivals.*
+
+*This is performed by a count-down timer which is independent of the queue or any currently scheduled events.* 
+*In the proposed solution, each road object operates such a timer that controls the scheduling of new car arrivals at predefined time intervals.*
+
+*The first method of scheduling is more light-weight and concentrates the scheduling logic at one place (event queue).*
+*In the second method the scheduling logic is placed away from the event queue, making it more distributed.* 
+*The perpetuation of scheduling is more robust in the second solution, as it is not sensitive to accidental loss or mishandling of events in the queue (e.g. if network communication was involved).* 
+
+<hr>
+
 ### Events
 
 #### Event
