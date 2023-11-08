@@ -4,7 +4,7 @@
  * The event
  * - generates a future LightSwitchEvent to set green light on in the other traffic direction
  * - terminates the current interval by switching the traffic lights
- * - schedules waiting cars (if there are any) for departure in the freshly started lights interval;
+ * - schedules waiting cars (if there are any) for departure in the freshly started lights interval:
  * -- this is limited to roads with green traffic light signal
  * -- the number of scheduled cars is limited by lights interval duration.
  */
